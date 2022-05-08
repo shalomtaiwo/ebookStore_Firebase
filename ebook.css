@@ -13,9 +13,6 @@ body{
 .userAccount{
     cursor: pointer;
 }
-.logout{
-    cursor: pointer;
-}
 .searchForBooks{
     z-index: 999;
     display: none;
@@ -82,4 +79,5 @@ body{
 .userSettings{
   display: flex;
   align-items: center;
+  cursor: pointer;
 }

@@ -26,7 +26,7 @@ class Store {
         this.loggedInHeader = document.querySelector('.loggedInUser');
         this.loggedInMain = document.querySelector('.loggedInMain');
         this.helloName = document.querySelector('.welcomeName');
-        this.logout = document.querySelector('.logout');
+        this.logout = document.querySelector('.userSettings');
 
         this.loggedOutHeader = document.querySelector('.loggedOutUser');
         this.loggedOutMain = document.querySelector('.loggedOutMain');

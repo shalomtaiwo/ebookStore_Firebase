@@ -99,7 +99,6 @@ class Store {
               // Return type determines whether we continue the redirect automatically
               // or whether we leave that to developer to handle.
               this.userId = authResult.user.uid;
-              console.log(user);
               this.redirectToApp();
             }
           },
@@ -182,7 +181,6 @@ fetchBooksFromDB(){
     addProduct({bookTitle, bookAbout, bookImage}) {
       const newBook = {id: cuid(), bookId: cuid(), bookTitle, bookAbout, bookImage}
       this.books = [...this.books, newBook];
-      console.log(this.books);
       this.render();
 }
 

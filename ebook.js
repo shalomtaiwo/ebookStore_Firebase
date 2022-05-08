@@ -210,10 +210,8 @@ fetchBooksFromDB(){
     
 
     deleteBook(id) {
-      this.books = this.books.filter((newBook) => {
-        newBook.id != id
-        alertify.success(`${newBook.bookTitle} removed from book store`); 
-      });
+      this.books = this.books.filter((newBook) => newBook.id != id);
+      alertify.success(`Book removed from book store`); 
       this.render();
   }
 

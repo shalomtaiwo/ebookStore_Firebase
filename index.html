@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="ebook.css">
+        <!-- Firebase UI -->
+        <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+        <!-- Alertify CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    </head>
+    <body>
+        <!-- Add Sticky Nav Bar -->
+        <nav class="searchForBooks p-3 position-sticky top-0 bg-primary">
+            <div action="" class="d-flex justify-content-between align-items-center">
+                <div class="userAccount ms-3" data-bs-toggle="modal" data-bs-target="#accountProfileModal">
+                    <h5 class="userName text-light" data-bs-toggle="tooltip" title="Profile">Hi, Shalom Taiwo (Profile)</h5>
+                </div>
+                <button class="btn text-light me-2" type="button" data-bs-toggle="modal" data-bs-target="#addNewBookModal" style="background-color: #8f038f;">Add New Book</button>
+            </div>
+        </nav>
+        <header class="header">
+            <!-- BootStrap NavBar -->
+            <!-- Logged In user NavBar -->
+            <div class="loggedInUser">
+                <nav class=" loggedIn navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="assets/loggedInBookStore.png" alt="" height="50px">
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" data-bs-toggle="tooltip" title="Dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tooltip" title="Support">Support</a>
+                        </li>
+                        </ul>
+                        <div class="userSettings">
+                            <span style="color: white;">Logout </span><img class="logout" src="assets/logout.svg" alt="" srcset="" height="40px"data-bs-toggle="tooltip" title="Logout">
+                        </div>
+                    </div>
+                    </div>
+                </nav>
+            </div>
+            <!-- LoggedOutUserNavBar -->
+            <div class="loggedOutUser">
+                <nav class="loggedOut navbar navbar-expand navbar-dark bg-primary d-flex">
+                    <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="assets/loggedOutBookStore.png" alt="" height="50px">
+                    </a>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item bg-dark" data-bs-toggle="modal" data-bs-target="#userLoginModal">
+                            <a class="nav-link active" aria-current="page">Login to Dashboard</a>
+                        </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Account Details -->
+        <main class="mainAccount">
+            <div class="loggedOutMain">
+                <div class="LoggedOutDesign d-flex justify-content-center">
+                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_pounvezv.json"  background="transparent"  speed="1"  style="width: 50%; height: auto;"  loop  autoplay></lottie-player>                
+                </div>
+                <!-- Create Login Modal -->
+                <div class="modal fade" id="userLoginModal" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createAccountLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                    <h5 class="modal-title" id="createAccountLabel">Login to Create your Ebooks</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="loginUser"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="loggedInMain">
+                    <!-- loggedIn Add New Book Modal -->
+                    <div class="modal fade" id="addNewBookModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addNewBookLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                        <h5 class="modal-title" id="addNewBookLabel">Add New Ebook</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form id="newBookProducts">
+                                  <div class="mb-3">
+                                    <label for="formGroupExampleInput" class="form-label">Add Book Title</label>
+                                    <input type="text" class="form-control" id="bookName" placeholder="Book Title" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="bookImage" class="form-label">Choose Book Image</label>
+                                    <input accept="image/*" type="file" class="form-control" id="bookImage" required>
+                                    <br>
+                                    <p>Preview:</p>
+                                    <div class="imagePreview">
+                                    <img width="50%" id="bookImagePreview" src="assets/image.svg" alt="your image" />
+                                    </div>
+                                    <script>
+                                      bookImage.onchange = evt => {
+                                      const [file] = bookImage.files
+                                      if (file) {
+                                        bookImagePreview.src = URL.createObjectURL(file)
+                                      }
+                                    }
+                                    </script>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="bookDetails" class="form-label">Book Details</label>
+                                    <textarea class="form-control" id="bookDetails" rows="6" required></textarea>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit" class="btn btn-primary">Add New Book</button>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Account Profile Modal -->
+                    <div class="modal fade" id="accountProfileModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="accountProfileLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                        <h5 class="modal-title" id="accountProfileLabel">Profile details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="currentUserDetails"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Page -->
+                    <div class="shopPage p-3">
+                        <div class="bookProducts">
+                            <div class="bookArchives" id="bookArchives">                            
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact Us Page -->
+                    <div class="contactUs p-3 d-none justify-content-center vh-80">
+                        <div class="formLeft"></div>
+                        <form class="row g-3 w-50">
+                            <div class="col-md-6">
+                                <label for="fullNames" class="form-label">Full Names</label>
+                                <input type="text" class="form-control" id="fullNames">
+                              </div>
+                            <div class="col-md-6">
+                              <label for="inputEmail4" class="form-label">Email</label>
+                              <input type="email" class="form-control" id="inputEmail4">
+                            </div>
+                            <div class="col-12">
+                              <label for="inputAddress" class="form-label">Subject</label>
+                              <input type="text" class="form-control" id="inputAddress" placeholder="Enquiry for ...">
+                            </div>
+                            <div class="col-12">
+                              <label for="inputAddress2" class="form-label">Message</label>
+                              <textarea type="text" class="form-control" id="inputAddress2" placeholder="Message"></textarea>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Accept privacy Policy
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                          </form>
+                          <div class="formRight"></div>
+                    </div>
+            </div>
+        </main>
+            <!-- Bootstrap CSS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+                <!-- CUID -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js" integrity="sha512-AvtLzKgbVcTZJ0QZ3nLJoTGN2wiE/emjebM9xneyqhtEBRTsNB+8oeQGkOmyOF+gnJd7k3Zvnghs9m6EuTpTEw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <!-- Lottie Player -->
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <!-- Alertify Js -->
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+        <!-- The core Firebase JS SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+
+
+        <!-- Add Firebase products -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+        
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+        <!-- Firebase JS Settings -->
+        
+        <script type="text/javascript">
+            
+            // Your web app's Fiebase configuration
+            const firebaseConfig = {
+              apiKey: "AIzaSyD-FDQoB0p6bih97wwyIMz4c5VvSx7tAew",
+              authDomain: "ebooktest-ec83f.firebaseapp.com",
+              projectId: "ebooktest-ec83f",
+              storageBucket: "ebooktest-ec83f.appspot.com",
+              messagingSenderId: "199390342961",
+              appId: "1:199390342961:web:44fa012d09d440547a4a10"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+
+        
+          </script>
+        <script src="ebook.js"></script>
+
+    </body>
+</html>

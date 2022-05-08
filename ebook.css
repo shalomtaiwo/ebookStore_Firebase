@@ -1,0 +1,85 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    /* outline: 1px solid #f00 !important; */
+}
+body{
+    overflow-x: hidden;
+}
+.nav-link{
+    cursor: pointer;
+}
+
+.userAccount{
+    cursor: pointer;
+}
+.logout{
+    cursor: pointer;
+}
+.searchForBooks{
+    z-index: 999;
+    display: none;
+}
+
+/* Scroll Bar */
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #cf0ff5 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff00;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #cf0ff5;
+    border-radius: 21px;
+    border: 3px ridge #ffffff;
+  }
+
+#bookArchives{
+  display: flex;
+  justify-content:center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#bookArchives  .book{
+  width: 250px;
+}
+
+.book{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(252, 252, 252);
+  padding: 10px;
+  margin: 10px;
+  box-shadow: -1px -1px 39px 0px rgba(0,0,0,0.45);
+-webkit-box-shadow: -1px -1px 39px 0px rgba(0,0,0,0.45);
+-moz-box-shadow: -1px -1px 39px 0px rgba(0,0,0,0.45);
+}
+.bookBody{
+  background-color: white;
+  padding: 5px;
+}
+.bookFooter{
+  background-color: #e7d5e7;
+}
+/* Logged in */
+.loggedInUser, .loggedInMain, .loggedOutUser,.loggedOutMain{
+  display: none;
+}
+.loggedInDesign{
+  display: none;
+}
+.userSettings{
+  display: flex;
+  align-items: center;
+}

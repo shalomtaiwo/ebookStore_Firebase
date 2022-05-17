@@ -213,17 +213,14 @@
         
         <script type="text/javascript">
             var API_Key = process.env.APIKey;
-            var AUTH_Domain = process.env.AUTHDomain;
-            var PROJECT_Id = process.env.PROJECTId;
-            var STORAGE_Bucket = process.env.STORAGEBucket;
             var MESSAGING_SenderId = process.env.MESSAGINGSenderId;
             var App_Id = process.env.APPId;
             // Your web app's Fiebase configuration
             const firebaseConfig = {
                 apiKey: API_Key,
-                authDomain: AUTH_Domain,
-                projectId: PROJECT_Id,
-                storageBucket: STORAGE_Bucket,
+                authDomain: "ebooktest-ec83f.firebaseapp.com",
+                projectId: "ebooktest-ec83f",
+                storageBucket: "ebooktest-ec83f.appspot.com",
                 messagingSenderId: MESSAGING_SenderId,
                 appId: App_Id
             };
